@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -27,11 +29,28 @@ public class RegistrationActivity extends AppCompatActivity {
     private Button submit;
     private SQLiteDatabase sqLiteDatabase;
     private String e, p, pa;
+    private CheckBox checkBox;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private Boolean saveLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         inti();
+
+        sharedPreferences=getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        editor=sharedPreferences.edit();
+        String login_mail=sharedPreferences.getString("email","");
+        String passwords=sharedPreferences.getString("password","");
+        saveLogin = sharedPreferences.getBoolean("saveLogin", false);
+        checkBox.setChecked(true);
+        if (saveLogin == true) {
+            checkBox.setChecked(true);
+            Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+            startActivity(intent);
+
+        }
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +84,16 @@ public class RegistrationActivity extends AppCompatActivity {
                         startActivity(i);
                     }
                     query.close();
+                    if(checkBox.isChecked()){
+                        editor.putString("email",e);
+                        editor.putString("password",pa);
+                        editor.putBoolean("saveLogin", true);
+                        editor.commit();
+                    }else{
+                        editor.putString("email","");
+                        editor.putString("password","");
+                        editor.commit();
+                    }
                     //Toast.makeText(getApplicationContext(), e, Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
                     startActivity(intent);
@@ -90,5 +119,6 @@ public class RegistrationActivity extends AppCompatActivity {
         phone = findViewById(R.id. phone);
         password = findViewById(R.id.password);
         submit = findViewById(R.id.submit_btn);
+        checkBox = findViewById(R.id.rememberme);
     }
 }

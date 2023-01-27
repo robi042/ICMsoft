@@ -18,6 +18,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/gif_view"
+            android:background="@drawable/welcome"
+            android:layout_gravity="center"/>
         <com.romainpiel.shimmer.ShimmerTextView
             android:id="@+id/shimmerTextID"
             android:layout_width="match_parent"
@@ -27,7 +34,7 @@
             android:textStyle="bold"
             android:textSize="50dp"
             android:fontFamily="@font/kavoon"
-            android:text="ICMSOFT ToDo"
+            android:text="ICMSOFT"
             app:reflectionColor="#f00"/>
 
         <com.google.android.material.progressindicator.CircularProgressIndicator

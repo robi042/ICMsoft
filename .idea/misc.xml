@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/drawable/bg_spinner.xml" value="0.1" />
         <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/drawable/btn_background_submit.xml" value="0.1" />
         <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/drawable/dashboard_title_red.xml" value="0.1" />
         <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/drawable/dashboard_title_white.xml" value="0.1" />
@@ -10,8 +11,14 @@
         <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/drawable/rounded_edittext.xml" value="0.1" />
         <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/drawable/soft_blue_bg.xml" value="0.1" />
         <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/layout/activity_dashboard.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/layout/activity_mtodo_list.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/layout/activity_registration.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/layout/activity_splash.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/layout/date_builder.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/layout/fragment_done_list.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/layout/fragment_new_list.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/layout/recycle_item_new.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/DCL/Documents/GitHub/ICMsoft/app/src/main/res/layout/time_builder.xml" value="0.10655737704918032" />
       </map>
     </option>
   </component>
