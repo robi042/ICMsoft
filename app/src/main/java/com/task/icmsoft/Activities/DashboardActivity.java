@@ -155,7 +155,7 @@ public class DashboardActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
             startActivity(i);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-            //alarmHelper.setAlarmsForIncompleteTasks();
+            alarmHelper.setAlarmsForIncompleteTasks();
         }
     }
 

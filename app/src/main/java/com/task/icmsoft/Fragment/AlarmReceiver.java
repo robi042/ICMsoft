@@ -39,14 +39,14 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Create the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "channel_id")
                 .setSmallIcon(R.drawable.ic_baseline_arrow_back_24)
-                .setContentTitle("Alarm")
-                .setContentText("This is an alarm notification")
+                .setContentTitle("Task Reminder")
+                .setContentText(taskName)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
 
         // Set the Intent to open when the notification is selected
         Intent notificationIntent = new Intent(context, MTodoListActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
         builder.setContentIntent(contentIntent);
 
         // Send the notification
