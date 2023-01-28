@@ -49,6 +49,13 @@
                 android:src="@drawable/ellipse"
                 app:civ_border_width="1dp"
                 app:civ_border_color="#fff"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/upload_photo"
+                android:layout_marginTop="-20dp"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/camera"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -139,6 +146,8 @@
                 android:layout_height="40dp"
                 android:id="@+id/catagory"
                 android:inputType="text"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="30dp"
                 android:textColor="@color/black"
@@ -191,9 +200,11 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="100dp"
+                android:minHeight="80dp"
                 android:id="@+id/task_name"
-                android:inputType="text"
+                android:gravity="start"
+                android:padding="3dp"
+                android:inputType="textMultiLine"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="30dp"
                 android:textColor="@color/black"

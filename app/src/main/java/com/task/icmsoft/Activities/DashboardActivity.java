@@ -57,7 +57,7 @@ import java.util.List;
 public class DashboardActivity extends AppCompatActivity {
     private auth auth = new auth(this);
     private TextView email, phone,go_todo;
-    private ImageView profile_image;
+    private ImageView profile_image,upload_photo;
     private static final int GALLERY_REQUEST_CODE = 1, PICK_IMAGE_REQUEST = 1;
     boolean doubleBackToExitPressedOnce = false;
     final int IMAGE_REQUEST_CODE = 999;
@@ -161,7 +161,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void calculateTime() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_ICMsoft));
-        builder.setCancelable(false);
+        builder.setCancelable(true);
         final View customLayout = getLayoutInflater().inflate(R.layout.time_builder, null);
         builder.setView(customLayout);
         final TimePicker time_clock = customLayout.findViewById(R.id.time_clock);
@@ -204,7 +204,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void calculateDate() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_ICMsoft));
-        builder.setCancelable(false);
+        builder.setCancelable(true);
         final View customLayout = getLayoutInflater().inflate(R.layout.date_builder, null);
         builder.setView(customLayout);
         final DatePicker date_picker1 = customLayout.findViewById(R.id.date_picker1);
@@ -235,7 +235,7 @@ public class DashboardActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         catagoryList.setAdapter(dataAdapter);
         //Toast.makeText(getApplicationContext(), auth.getEmail(), Toast.LENGTH_LONG).show();
-        profile_image.setOnClickListener(new View.OnClickListener() {
+        upload_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
@@ -298,7 +298,7 @@ private void init_view() {
         getSupportActionBar().setElevation(0);//remove actionbar shadow
         setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -317,6 +317,7 @@ private void init_view() {
         task_name = findViewById(R.id.task_name);
         task_btn = findViewById(R.id.task_btn);
         go_todo = findViewById(R.id.go_todo);
+        upload_photo = findViewById(R.id.upload_photo);
         email.setText("Email: "+auth.getEmail());
         phone.setText("Phone: "+auth.getPhone());
         catagoryHelper = new CatagoryHelper(this);

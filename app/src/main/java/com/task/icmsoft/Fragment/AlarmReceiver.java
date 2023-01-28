@@ -14,6 +14,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.task.icmsoft.Activities.MTodoListActivity;
+import com.task.icmsoft.Helper.AlarmHelper;
 import com.task.icmsoft.R;
 
 public class AlarmReceiver extends BroadcastReceiver {
@@ -21,11 +22,13 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        mp = MediaPlayer.create(context, Settings.System.DEFAULT_RINGTONE_URI);
+        mp = MediaPlayer.create(context, Settings.System.DEFAULT_ALARM_ALERT_URI);
         mp.setLooping(true);
         mp.start();
-        int taskId = intent.getIntExtra("task_id", 0);
+        int taskId = intent.getIntExtra("task_id", -1);
         String taskName = intent.getStringExtra("task_name");
+        AlarmHelper alarmHelper = new AlarmHelper(context);
+        alarmHelper.cancelAlarm(taskId);
         // handle the alarm here, for example, show a notification
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -44,6 +47,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
 
+
         // Set the Intent to open when the notification is selected
         Intent notificationIntent = new Intent(context, MTodoListActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
@@ -51,6 +55,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         // Send the notification
         notificationManager.notify(0, builder.build());
+
     }
 }
 

@@ -56,6 +56,14 @@ public class AlarmHelper {
             e.printStackTrace();
         }
     }
+
+    public void cancelAlarm(int taskId) {
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.setAction("com.task.icmsoft.ALARM");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, taskId, intent, PendingIntent.FLAG_IMMUTABLE);
+        alarmManager.cancel(pendingIntent);
+    }
+
 }
 
 
