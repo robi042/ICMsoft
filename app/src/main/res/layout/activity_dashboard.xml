@@ -89,9 +89,10 @@
                 android:textColor="@color/white"/>
             <TextView
                 android:id="@+id/go_todo"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end"
+                android:padding="5dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
@@ -99,8 +100,9 @@
                 android:text="TODO LIST->"
                 android:textStyle="italic"
                 android:textSize="15dp"
+                android:background="@drawable/rounded_edittext"
                 android:fontFamily="@font/portlligatslab"
-                android:textColor="@color/white"/>
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -159,6 +161,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:layout_marginTop="15dp"
                 android:text="Add ToDo Task:"
                 android:textSize="15dp"

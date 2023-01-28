@@ -1,6 +1,7 @@
 package com.task.icmsoft.Adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,27 @@ public class doneListAdapter extends RecyclerView.Adapter<doneListAdapter.DoneHo
     public void onBindViewHolder(@NonNull DoneHolder holder, int position) {
         holder.task.setText("Task: "+ task.get(position).getTask());
         holder.category.setText("Category: "+ task.get(position).getCategory());
-        holder.time.setText("Time: "+ task.get(position).getTime());
+        String str = task.get(position).getTime();
+        String[] splitStr = str.split("\\s+");
+        String[] items = splitStr[1].split(":");
+        int hour = 0, minute = 0;
+        String am_pm;
+        if (Build.VERSION.SDK_INT >= 23 ){
+            hour = Integer.parseInt(items[0]);
+            minute = Integer.parseInt(items[1]);
+        }
+        else{
+            holder.time.setText("Time: "+ task.get(position).getTime());
+        }
+        if(hour > 12) {
+            am_pm = "PM";
+            hour = hour - 12;
+        }
+        else
+        {
+            am_pm="AM";
+        }
+        holder.time.setText("Time: "+splitStr[0]+" "+hour +":"+ minute+" "+am_pm);
         holder.done_btn.setVisibility(View.GONE);
 
     }

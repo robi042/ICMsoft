@@ -1,7 +1,10 @@
 package com.task.icmsoft.Adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +14,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.task.icmsoft.Activities.DashboardActivity;
+import com.task.icmsoft.Activities.MTodoListActivity;
 import com.task.icmsoft.DB.TodoDatabaseHelper;
 import com.task.icmsoft.ModelClass.Task;
 import com.task.icmsoft.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class newListAdapter extends RecyclerView.Adapter<newListAdapter.NewHolder> {
@@ -40,7 +47,27 @@ public class newListAdapter extends RecyclerView.Adapter<newListAdapter.NewHolde
     public void onBindViewHolder(@NonNull NewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.task.setText("Task: "+ task.get(position).getTask());
         holder.category.setText("Category: "+ task.get(position).getCategory());
-        holder.time.setText("Time: "+ task.get(position).getTime());
+        String str = task.get(position).getTime();
+        String[] splitStr = str.split("\\s+");
+        String[] items = splitStr[1].split(":");
+        int hour = 0, minute = 0;
+        String am_pm;
+        if (Build.VERSION.SDK_INT >= 23 ){
+            hour = Integer.parseInt(items[0]);
+            minute = Integer.parseInt(items[1]);
+        }
+        else{
+            holder.time.setText("Time: "+ task.get(position).getTime());
+        }
+        if(hour > 12) {
+            am_pm = "PM";
+            hour = hour - 12;
+        }
+        else
+        {
+            am_pm="AM";
+        }
+        holder.time.setText("Time: "+splitStr[0]+" "+hour +":"+ minute+" "+am_pm);
         holder.done_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +75,9 @@ public class newListAdapter extends RecyclerView.Adapter<newListAdapter.NewHolde
                 TodoDatabaseHelper todoDatabaseHelper = new TodoDatabaseHelper(context);
                 task1.setId(task.get(position).getId());
                 todoDatabaseHelper.updateTask(task1);
+                Intent i = new Intent(context, MTodoListActivity.class);
+                context.startActivity(i);
+                ((Activity) view.getContext()).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
 

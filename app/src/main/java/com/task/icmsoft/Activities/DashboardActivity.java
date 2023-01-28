@@ -3,12 +3,14 @@ package com.task.icmsoft.Activities;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,8 +20,10 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.Window;
@@ -55,6 +59,7 @@ public class DashboardActivity extends AppCompatActivity {
     private TextView email, phone,go_todo;
     private ImageView profile_image;
     private static final int GALLERY_REQUEST_CODE = 1, PICK_IMAGE_REQUEST = 1;
+    boolean doubleBackToExitPressedOnce = false;
     final int IMAGE_REQUEST_CODE = 999;
     SQLiteDatabase sqLiteDatabase;
     private Uri mImageUri;
@@ -106,15 +111,24 @@ public class DashboardActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), MTodoListActivity.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             }
         });
+        try {
+            SQLiteDatabase db = openOrCreateDatabase("photo_db", MODE_PRIVATE, null);
+            Cursor cursor = db.rawQuery("SELECT * FROM image", null);
+            if(cursor.getCount() > 0){
+                byte[] imageAs = imageHelper.getImage(); // get image from the database
+                Bitmap image = BitmapFactory.decodeByteArray(imageAs, 0, imageAs.length);
 
-        if(imageHelper.getImage() != null){
-            byte[] imageAs = imageHelper.getImage(); // get image from the database
-            Bitmap image = BitmapFactory.decodeByteArray(imageAs, 0, imageAs.length);
-
-            profile_image.setImageBitmap(image);
+                profile_image.setImageBitmap(image);
+            }
+            cursor.close();
+            db.close();
+        } catch (SQLiteException e) {
+            Log.e("SQLiteException", "Error while trying to retrieve image from the database", e);
         }
+
 
     }
 
@@ -123,7 +137,7 @@ public class DashboardActivity extends AppCompatActivity {
         super.onResume();
 
         // Set alarms for all incomplete tasks
-        alarmHelper.setAlarmsForIncompleteTasks();
+        //alarmHelper.setAlarmsForIncompleteTasks();
     }
 
     private void addNewTask() {
@@ -138,6 +152,10 @@ public class DashboardActivity extends AppCompatActivity {
             Toast.makeText(DashboardActivity.this, "Error inserting task", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(DashboardActivity.this, "Task inserted successfully with id: " + id, Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            //alarmHelper.setAlarmsForIncompleteTasks();
         }
     }
 
@@ -238,6 +256,9 @@ public class DashboardActivity extends AppCompatActivity {
         else{
             catagoryHelper.addCategory(catagory.getText().toString());
             catagory.setText("");
+            Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             Toast.makeText(DashboardActivity.this,
                     "Added Succesfully",
                     Toast.LENGTH_SHORT).show();
@@ -302,6 +323,24 @@ private void init_view() {
         todoDatabaseHelper = new TodoDatabaseHelper(this);
         imageHelper = new ImageHelper(this);
         //Toast.makeText(getApplicationContext(), ""+auth.getImage(), Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (doubleBackToExitPressedOnce) {
+            finishAffinity();
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please press BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
 
     }
 }

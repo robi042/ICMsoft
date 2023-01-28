@@ -37,25 +37,26 @@ public class AlarmHelper {
 
     private void setAlarm(Task task) {
         Intent intent = new Intent(context, AlarmReceiver.class);
-        intent.setAction("com.example.helloandroid.alarms");
+        intent.setAction("com.task.icmsoft.ALARM");
         intent.putExtra("task_id", task.getId());
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, task.getId(), intent, PendingIntent.FLAG_IMMUTABLE);
-
-//        if(alarmManager.getNextAlarmClock() == null){
-//            Toast.makeText(context, "no alarm set", Toast.LENGTH_SHORT).show();
-//        }
-//        else{
-//            Toast.makeText(context, alarmManager.getNextAlarmClock().toString(), Toast.LENGTH_SHORT).show();
-//        }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             Date date = sdf.parse(task.getTime());
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, date.getTime(), pendingIntent);
-            Toast.makeText(context, alarmManager.toString(), Toast.LENGTH_SHORT).show();
+            long timeInMilliseconds = date.getTime();
+            if(timeInMilliseconds > System.currentTimeMillis()){
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
+                //Toast.makeText(context, "Alarm set for task "+task.getTask()+" at "+task.getTime(), Toast.LENGTH_SHORT).show();
+            }
+            else{
+                //Toast.makeText(context, "Alarm not set, time is in the past", Toast.LENGTH_SHORT).show();
+            }
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 }
+
 
 

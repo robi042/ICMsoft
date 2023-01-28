@@ -41,17 +41,13 @@ public class CatagoryHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // On upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORIES);
-
-        // Create new tables
         onCreate(db);
     }
 
     public void addCategory(String categoryName) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(CATEGORY_NAME, categoryName);
-
         db.insert(TABLE_CATEGORIES, null, values);
         db.close();
     }

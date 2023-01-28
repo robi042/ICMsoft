@@ -1,59 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
+    android:layout_margin="8dp"
+    android:background="@color/cardview_light_background"
+    android:elevation="12dp"
+    app:cardCornerRadius="20dp"
+    android:shape="ring"
+    android:innerRadius="40dp"
+    android:thicknessRatio="4"
+    android:focusable="true"
+    app:cardElevation="10dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="true"
         android:orientation="horizontal"
-        android:layout_margin="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="10dp">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight=".80"
-            android:orientation="vertical">
-            <TextView
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Task Tile"
-                android:id="@+id/task"
-                android:textColor="@color/black"
-                android:textSize="15sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Task Category"
-                android:id="@+id/category"
-                android:textColor="@color/black"
-                android:textSize="15sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Task Time"
-                android:id="@+id/time"
-                android:textColor="@color/black"
-                android:textSize="15sp"/>
+                android:layout_weight=".80"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Task Tile"
+                    android:id="@+id/task"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Task Category"
+                    android:id="@+id/category"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Task Time"
+                    android:id="@+id/time"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_weight=".20"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:id="@+id/done_btn"
+                android:layout_marginBottom="40dp"
+                android:text="Done"
+                android:textAllCaps="false"
+                android:fontFamily="@font/kavoon"
+                android:textSize="12dp"
+                android:textColor="#fff"
+                android:background="@drawable/btn_background_submit"/>
+
         </LinearLayout>
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="60dp"
-            android:layout_height="30dp"
-            android:layout_weight=".20"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="40dp"
-            android:id="@+id/done_btn"
-            android:layout_marginBottom="40dp"
-            android:text="Done"
-            android:textAllCaps="false"
-            android:fontFamily="@font/kavoon"
-            android:textSize="20dp"
-            android:textColor="#fff"
-            android:background="@drawable/btn_background_submit"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

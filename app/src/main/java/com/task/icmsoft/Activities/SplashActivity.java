@@ -1,6 +1,7 @@
 package com.task.icmsoft.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,6 +25,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_splash);
         getSupportActionBar().setElevation(0);
         setTitle("");
@@ -38,17 +40,11 @@ public class SplashActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.parseColor("#6A5BE2"));
         }
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#6A5BE2")));
-        //Drawable drawable = getResources().getDrawable(R.drawable.progress_circle);
         final ProgressBar mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
-        mProgress.setProgress(0);   // Main Progress
-        mProgress.setSecondaryProgress(100); // Secondary Progress
-        mProgress.setMax(100); // Maximum Progress
-        //mProgress.setProgressDrawable(drawable);
+        mProgress.setProgress(0);
+        mProgress.setSecondaryProgress(100);
+        mProgress.setMax(100);
 
-      /*  ObjectAnimator animation = ObjectAnimator.ofInt(mProgress, "progress", 0, 100);
-        animation.setDuration(50000);
-        animation.setInterpolator(new DecelerateInterpolator());
-        animation.start();*/
         new Thread(new Runnable() {
 
             @Override
@@ -67,16 +63,14 @@ public class SplashActivity extends AppCompatActivity {
                         }
                     });
                     try {
-                        // Sleep for 200 milliseconds.
-                        // Just to display the progress slowly
-                        Thread.sleep(20); //thread will take approx 1.5 seconds to finish
+                        Thread.sleep(20);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
             }
         }).start();
-        int secondsDelayed = 2;
+        int secondsDelayed = 4;
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 startActivity(new Intent(SplashActivity.this, RegistrationActivity.class));
